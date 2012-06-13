@@ -36,6 +36,7 @@ LRESULT CALLBACK BWWndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam);
 void RecordScreenPositions();
 void PlaybackScreenPositions();
 
+
 void _log(const char* msg) {
     fprintf(fpLogFile, "%i:\t%s\r\n", (int)(GetTickCount() - initTickCount) / 100, msg);
     fflush(fpLogFile);
@@ -203,6 +204,10 @@ DWORD WINAPI mainThread( LPVOID lpParam ) {
 
 void RecordScreenPositions() {
     _log("start screen position recording");
+    char lastFPReplayPath[MAX_PATH];
+    char newFPRepPath[MAX_PATH];
+    sprintf(lastFPReplayPath, "%smaps\\replays\\lastfpreplay.rep", pBWFolder);
+
     FPR_DATA* pFprData = (FPR_DATA*)malloc(2000000); // lets hope 2 megabytes is enough :D
     int counter = 0;
     int lastScreenX  = 0;
@@ -229,21 +234,15 @@ void RecordScreenPositions() {
         Sleep(15);
     }
 
-    _log("copy last replay");
-    // write the collected data to the replay file after some time
-    Sleep(2000);
-    // copy lastreplay to fpreplay folder
-    int i = 0;
-    char lastReplayPath[MAX_PATH];
-    char newFPRepPath[MAX_PATH];
-    sprintf(lastReplayPath, "%smaps\\replays\\lastreplay.rep", pBWFolder);
-    sprintf(newFPRepPath, "%smaps\\replays\\fpreps\\%i.rep", pBWFolder, i);
+    _log("save the replay");
+    BWFXN_SaveReplay("lastfpreplay");
 
     // try to copy the last replay until it works (gnihihihihi)
-    while (CopyFile(lastReplayPath, newFPRepPath, TRUE) == 0) {
-        i++;
+    int i = 0;
+    do {
         sprintf(newFPRepPath, "%smaps\\replays\\fpreps\\%i.rep", pBWFolder, i);
-    }
+        i++;
+    } while (CopyFile(lastFPReplayPath, newFPRepPath, TRUE) == 0);
 
     _log("write data to copied replay");
     WriteFPRData(newFPRepPath, pFprData, counter);

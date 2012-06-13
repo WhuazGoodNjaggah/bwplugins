@@ -11,6 +11,7 @@ char*  pReplayPath  = (char*) 0x57FD3C;
 char*  pBWFolder    = (char*) 0x1505E4C8;
 
 void (__cdecl *BWFXN_DisplayText)(const char* message, DWORD player) = (void(__cdecl*)(const char*, DWORD)) 0x0048D1C0;
+void (__cdecl *BWFXN_SaveReplay)(const char* name) = (void(__cdecl*)(const char*)) 0x004DED30;
 
 
 HWND hWndBW = 0;
