@@ -1,0 +1,6 @@
+EXPORTS
+    ApplyPatch @1
+    ApplyPatchSuspended @2
+    GetData @3
+    GetPluginAPI @4
+    OpenConfig @5
