@@ -1,16 +1,22 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
 <CodeBlocks_layout_file>
 	<ActiveTarget name="Release" />
+	<File name="ezlib\easyzlib.c" open="0" top="0" tabpos="0">
+		<Cursor position="375" topLine="0" />
+	</File>
+	<File name="ezlib\easyzlib.h" open="1" top="0" tabpos="5">
+		<Cursor position="676" topLine="13" />
+	</File>
 	<File name="main.cpp" open="1" top="1" tabpos="1">
-		<Cursor position="836" topLine="33" />
+		<Cursor position="7549" topLine="204" />
 	</File>
 	<File name="offsets.h" open="1" top="0" tabpos="4">
-		<Cursor position="568" topLine="0" />
+		<Cursor position="1967" topLine="20" />
 	</File>
 	<File name="replay_file.cpp" open="1" top="0" tabpos="2">
-		<Cursor position="503" topLine="0" />
+		<Cursor position="3265" topLine="66" />
 	</File>
 	<File name="replay_file.h" open="1" top="0" tabpos="3">
-		<Cursor position="392" topLine="5" />
+		<Cursor position="392" topLine="1" />
 	</File>
 </CodeBlocks_layout_file>

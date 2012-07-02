@@ -47,6 +47,10 @@
 				</Linker>
 			</Target>
 		</Build>
+		<Unit filename="ezlib\easyzlib.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="ezlib\easyzlib.h" />
 		<Unit filename="main.cpp" />
 		<Unit filename="offsets.h" />
 		<Unit filename="replay_file.cpp" />

@@ -213,6 +213,9 @@ void RecordScreenPositions() {
     int lastScreenX  = 0;
     int lastScreenY  = 0;
 
+    // sleep a little, maybe less crashes then (needs better fix)
+    Sleep(500);
+    BWFXN_DisplayText("Start recording screen positions.", 0);
     while (*pIsIngame == 1) {
         int gameTick = *pGameTicks;
         int screenX  = *pScreenX;
@@ -235,20 +238,23 @@ void RecordScreenPositions() {
     }
 
     _log("save the replay");
-    BWFXN_SaveReplay("lastfpreplay");
+    char name[] = "lastfpreplay";
+    EAX_PUSH_Call((DWORD)name, 1, 0x4DFAB0);
 
+    _log("copy the replay");
     // try to copy the last replay until it works (gnihihihihi)
     int i = 0;
     do {
-        sprintf(newFPRepPath, "%smaps\\replays\\fpreps\\%i.rep", pBWFolder, i);
+        sprintf(newFPRepPath, "%smaps\\replays\\fpreps\\%04i.rep", pBWFolder, i);
         i++;
     } while (CopyFile(lastFPReplayPath, newFPRepPath, TRUE) == 0);
 
     _log("write data to copied replay");
     WriteFPRData(newFPRepPath, pFprData, counter);
 
-    _log("remove the collected data from ram");
+    _log("remove the collected data from ram and delete last fp replay.");
     free(pFprData);
+    DeleteFile(lastFPReplayPath);
 }
 
 void PlaybackScreenPositions() {
